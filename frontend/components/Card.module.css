@@ -60,16 +60,14 @@
     );
 }
 
-.backPattern::after {
-  content: 'Ω';
+.amphoraSvg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.8rem;
-  font-family: 'Cinzel', serif;
-  color: rgba(212, 168, 67, 0.3);
-  pointer-events: none;
+  width: 44px;
+  height: 56px;
+  opacity: 0.9;
 }
 
 /* Suit colors */

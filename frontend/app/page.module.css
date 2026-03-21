@@ -22,15 +22,38 @@
   inset: 0;
   background-image:
     radial-gradient(1px 1px at 15% 20%, rgba(240,236,224,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 35% 8%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 8%,  rgba(240,236,224,0.3) 0%, transparent 100%),
     radial-gradient(1px 1px at 55% 15%, rgba(240,236,224,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 72% 6%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 6%,  rgba(240,236,224,0.3) 0%, transparent 100%),
     radial-gradient(1px 1px at 88% 22%, rgba(240,236,224,0.4) 0%, transparent 100%),
     radial-gradient(1px 1px at 25% 35%, rgba(240,236,224,0.2) 0%, transparent 100%),
     radial-gradient(1px 1px at 80% 40%, rgba(240,236,224,0.3) 0%, transparent 100%),
     radial-gradient(1.5px 1.5px at 45% 25%, rgba(212,168,67,0.5) 0%, transparent 100%),
-    radial-gradient(1px 1px at 62% 32%, rgba(240,236,224,0.2) 0%, transparent 100%);
+    radial-gradient(1px 1px at 62% 32%, rgba(240,236,224,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 8%  10%, rgba(240,236,224,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 5%,  rgba(240,236,224,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 20% 3%, rgba(212,168,67,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 7%,  rgba(240,236,224,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 68% 18%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 28%, rgba(240,236,224,0.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 78% 28%, rgba(255,255,220,0.5) 0%, transparent 100%);
   pointer-events: none;
+  animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+.seaHorizon {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(14,45,82,0.6), transparent);
+  pointer-events: none;
+}
+
+.seaShimmer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,168,67,0.3) 30%, rgba(180,210,255,0.4) 50%, rgba(212,168,67,0.3) 70%, transparent 100%);
 }
 
 /* Greek columns on left and right */
@@ -42,7 +65,7 @@
   align-items: flex-end;
   pointer-events: none;
   padding: 0 48px;
-  opacity: 0.12;
+  opacity: 0.18;
 }
 
 .column {

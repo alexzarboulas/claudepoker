@@ -20,6 +20,16 @@ export default function PokerTable({ gameState, validActions, onAction, onNewHan
     return (
       <div className={styles.tableWrap}>
         <div className={styles.table}>
+          <div className={styles.leftColumn}>
+            <div className={styles.colCapital} />
+            <div className={styles.colShaft}><div className={styles.colFlute}/><div className={styles.colFlute}/><div className={styles.colFlute}/></div>
+            <div className={styles.colBase} />
+          </div>
+          <div className={styles.rightColumn}>
+            <div className={styles.colCapital} />
+            <div className={styles.colShaft}><div className={styles.colFlute}/><div className={styles.colFlute}/><div className={styles.colFlute}/></div>
+            <div className={styles.colBase} />
+          </div>
           <div className={styles.startScreen}>
             <div className={styles.startLogo}>PokerIQ</div>
             <p className={styles.startSub}>Heads-Up Texas Hold'em</p>
@@ -39,6 +49,18 @@ export default function PokerTable({ gameState, validActions, onAction, onNewHan
   return (
     <div className={styles.tableWrap}>
       <div className={styles.table}>
+        {/* Marble columns */}
+        <div className={styles.leftColumn}>
+          <div className={styles.colCapital} />
+          <div className={styles.colShaft}><div className={styles.colFlute}/><div className={styles.colFlute}/><div className={styles.colFlute}/></div>
+          <div className={styles.colBase} />
+        </div>
+        <div className={styles.rightColumn}>
+          <div className={styles.colCapital} />
+          <div className={styles.colShaft}><div className={styles.colFlute}/><div className={styles.colFlute}/><div className={styles.colFlute}/></div>
+          <div className={styles.colBase} />
+        </div>
+
         {/* Table felt rim */}
         <div className={styles.rim} />
 

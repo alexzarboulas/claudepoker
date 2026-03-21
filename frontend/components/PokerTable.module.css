@@ -14,12 +14,54 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 40px;
+  padding: 24px 64px;
   overflow: hidden;
 
   /* Aegean blue felt */
   background:
     radial-gradient(ellipse at center, #0a2244 0%, #0e2d52 50%, #07182e 100%);
+}
+
+/* Marble columns flanking the table */
+.leftColumn, .rightColumn {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 2;
+  animation: columnRise 1.2s ease both;
+}
+.leftColumn  { left: 0; }
+.rightColumn { right: 0; animation-delay: 0.15s; }
+
+.colCapital {
+  width: 52px; height: 20px;
+  background: linear-gradient(to bottom, #e8e0d0, #c0b090);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+.colShaft {
+  flex: 1; width: 36px;
+  background: linear-gradient(to right, #8a7a60, #f0ece0 40%, #f5f0e4 60%, #8a7a60);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 12px 0;
+}
+.colFlute {
+  height: 1px;
+  background: rgba(100,80,50,0.15);
+  width: 100%;
+}
+.colBase {
+  width: 48px; height: 22px;
+  background: linear-gradient(to top, #c0b090, #e8e0d0);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.4);
+  flex-shrink: 0;
 }
 
 /* Inner oval rim — Hellenic gold double-line */

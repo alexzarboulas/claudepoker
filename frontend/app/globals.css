@@ -159,6 +159,11 @@ h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--text-gold); letter-spaci
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes twinkle {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
 /* ---- Meander (Greek key) border utility ---- */
 .meander-border {
   border: 2px solid var(--gold-dim);

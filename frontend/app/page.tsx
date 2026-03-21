@@ -7,6 +7,8 @@ export default function LandingPage() {
       {/* Background elements */}
       <div className={styles.bgGradient} aria-hidden />
       <div className={styles.stars} aria-hidden />
+      <div className={styles.seaHorizon} aria-hidden />
+      <div className={styles.seaShimmer} aria-hidden />
 
       {/* Greek columns decoration */}
       <div className={styles.columns} aria-hidden>
