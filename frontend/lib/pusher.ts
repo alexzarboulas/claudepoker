@@ -7,3 +7,7 @@ export const pusherServer = new Pusher({
   cluster: process.env.PUSHER_CLUSTER!,
   useTLS: true,
 });
+
+export async function triggerUserEvent(userId: string, event: string, data: unknown) {
+  return pusherServer.trigger(`private-user-${userId}`, event, data);
+}

@@ -7,6 +7,7 @@ import { getValidActions } from '@/lib/engine';
 import TopBar from '@/components/TopBar';
 import PokerTable from '@/components/PokerTable';
 import Sidebar from '@/components/Sidebar';
+import TableChat from '@/components/TableChat';
 import styles from './game.module.css';
 
 interface Props {
@@ -154,27 +155,30 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
         </div>
       )}
       {roomStatus !== 'waiting' && (
-        <div className={styles.body}>
-          <PokerTable
-            gameState={tableState}
-            validActions={validActions}
-            onAction={handleAction}
-            onNewHand={handleNewHand}
-            isOpponentThinking={
-              !isSubmitting &&
-              gameState?.actionOn !== null &&
-              gameState?.actionOn !== perspective &&
-              gameState?.phase !== 'complete'
-            }
-            opponentName={opponentUsername}
-            myName={username}
-          />
-          <Sidebar
-            stats={{ vpip: 0, pfr: 0, aggressionFactor: 0, foldTo3bet: 0, cbetFreq: 0, foldToRiverBet: 0, sampleSize: 0 }}
-            tips={[]}
-            history={[]}
-          />
-        </div>
+        <>
+          <div className={styles.body}>
+            <PokerTable
+              gameState={tableState}
+              validActions={validActions}
+              onAction={handleAction}
+              onNewHand={handleNewHand}
+              isOpponentThinking={
+                !isSubmitting &&
+                gameState?.actionOn !== null &&
+                gameState?.actionOn !== perspective &&
+                gameState?.phase !== 'complete'
+              }
+              opponentName={opponentUsername}
+              myName={username}
+            />
+            <Sidebar
+              stats={{ vpip: 0, pfr: 0, aggressionFactor: 0, foldTo3bet: 0, cbetFreq: 0, foldToRiverBet: 0, sampleSize: 0 }}
+              tips={[]}
+              history={[]}
+            />
+          </div>
+          <TableChat roomId={roomId} myUsername={username} />
+        </>
       )}
     </div>
   );

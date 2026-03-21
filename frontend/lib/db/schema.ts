@@ -6,6 +6,10 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   passwordHash: text('password_hash').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
+  bio: text('bio'),
+  nickname: text('nickname'),
+  avatarUrl: text('avatar_url'),
+  lastSeen: timestamp('last_seen'),
 });
 
 export const gameRooms = pgTable('game_rooms', {
@@ -42,4 +46,30 @@ export const playerStats = pgTable('player_stats', {
   totalBets: integer('total_bets').notNull().default(0),
   totalCalls: integer('total_calls').notNull().default(0),
   sessionPnl: integer('session_pnl').notNull().default(0),
+});
+
+export const friendships = pgTable('friendships', {
+  id: text('id').primaryKey(),
+  requesterId: text('requester_id').notNull().references(() => users.id),
+  addresseeId: text('addressee_id').notNull().references(() => users.id),
+  status: text('status').notNull().default('pending'), // 'pending' | 'accepted' | 'declined'
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const directMessages = pgTable('direct_messages', {
+  id: text('id').primaryKey(),
+  senderId: text('sender_id').notNull().references(() => users.id),
+  receiverId: text('receiver_id').notNull().references(() => users.id),
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  readAt: timestamp('read_at'),
+});
+
+export const tableMessages = pgTable('table_messages', {
+  id: text('id').primaryKey(),
+  roomId: text('room_id').notNull().references(() => gameRooms.id),
+  userId: text('user_id').notNull().references(() => users.id),
+  username: text('username').notNull(),
+  content: text('content').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
 });
