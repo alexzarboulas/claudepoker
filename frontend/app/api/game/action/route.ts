@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { gameRooms, handHistory, playerStats } from '@/lib/db/schema';
 import { eq, sql } from 'drizzle-orm';
@@ -18,7 +19,7 @@ const schema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const userId = (session.user as { id?: string }).id;

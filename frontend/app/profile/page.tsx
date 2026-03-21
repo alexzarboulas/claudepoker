@@ -1,4 +1,5 @@
 import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { db } from '@/lib/db';
 import { playerStats, users } from '@/lib/db/schema';
@@ -7,7 +8,7 @@ import styles from './profile.module.css';
 import Link from 'next/link';
 
 export default async function ProfilePage() {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   if (!session?.user) redirect('/login');
   const userId = (session.user as { id?: string }).id!;
 
