@@ -73,6 +73,11 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
       loadState();
     });
 
+    // new-hand: next hand was dealt — both clients reload fresh state
+    channel.bind('new-hand', () => {
+      loadState();
+    });
+
     // state-update: a player acted — use ref to pick the correct player's state
     channel.bind('state-update', (data: { stateForP1: GameState; stateForP2: GameState }) => {
       const myState = perspectiveRef.current === 'human' ? data.stateForP1 : data.stateForP2;
@@ -105,9 +110,14 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
     });
   }, [roomId]);
 
-  const handleNewHand = useCallback(() => {
-    loadState();
-  }, [loadState]);
+  const handleNewHand = useCallback(async () => {
+    await fetch('/api/game/new-hand', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ roomId }),
+    });
+    // Server will trigger 'new-hand' Pusher event; both clients reload via that handler
+  }, [roomId]);
 
   const myPlayer = gameState?.players[perspective];
   const validActions: ValidActions | null =
