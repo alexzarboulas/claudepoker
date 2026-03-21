@@ -1,17 +1,39 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Pusher from 'pusher-js';
 import styles from './LobbyCard.module.css';
 
 export default function LobbyCard({ username }: { username: string }) {
   const router = useRouter();
   const [roomCode, setRoomCode] = useState('');
   const [createdCode, setCreatedCode] = useState('');
+  const [createdRoomId, setCreatedRoomId] = useState('');
   const [joining, setJoining] = useState(false);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const pusherRef = useRef<Pusher | null>(null);
+
+  // Subscribe to Pusher when a room is created, redirect when opponent joins
+  useEffect(() => {
+    if (!createdRoomId) return;
+
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY!, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER!,
+    });
+    pusherRef.current = pusher;
+    const channel = pusher.subscribe(`game-${createdRoomId}`);
+    channel.bind('game-start', () => {
+      router.push(`/game/${createdRoomId}`);
+    });
+
+    return () => {
+      channel.unbind_all();
+      pusher.unsubscribe(`game-${createdRoomId}`);
+    };
+  }, [createdRoomId, router]);
 
   async function handleCreate() {
     setCreating(true);
@@ -20,14 +42,8 @@ export default function LobbyCard({ username }: { username: string }) {
     const data = await res.json();
     if (!res.ok) { setError(data.error); setCreating(false); return; }
     setCreatedCode(data.roomCode);
+    setCreatedRoomId(data.roomId);
     setCreating(false);
-    // Poll for opponent joining
-    pollForStart(data.roomId);
-  }
-
-  async function pollForStart(roomId: string) {
-    // Redirect once game starts (Pusher handles it on client, this is fallback)
-    router.push(`/game/${roomId}`);
   }
 
   async function handleJoin(e: React.FormEvent) {
