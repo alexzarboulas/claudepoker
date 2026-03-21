@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Pusher from 'pusher-js';
 import { GameState, Action, ValidActions } from '@/lib/types';
 import { getValidActions } from '@/lib/engine';
@@ -30,27 +30,36 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
   const [opponentUsername, setOpponentUsername] = useState<string>('Opponent');
   const [sessionPnl, setSessionPnl] = useState(0);
   const [handCount, setHandCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Load initial state
+  // Keep a ref so Pusher handlers always read the latest perspective
+  const perspectiveRef = useRef<'human' | 'opponent'>('human');
   useEffect(() => {
-    async function loadState() {
-      const res = await fetch(`/api/game/state?roomId=${roomId}`);
-      if (!res.ok) return;
-      const data: RoomInfo = await res.json();
-      setPerspective(data.perspective);
-      setRoomStatus(data.status);
-      if (data.gameState) {
-        setGameState(data.gameState);
-        setHandCount(data.gameState.handNumber);
-      }
-      if (data.perspective === 'human') {
-        setOpponentUsername(data.player2Username ?? 'Opponent');
-      } else {
-        setOpponentUsername(data.player1Username ?? 'Opponent');
-      }
+    perspectiveRef.current = perspective;
+  }, [perspective]);
+
+  const loadState = useCallback(async () => {
+    const res = await fetch(`/api/game/state?roomId=${roomId}`);
+    if (!res.ok) return;
+    const data: RoomInfo = await res.json();
+    perspectiveRef.current = data.perspective;
+    setPerspective(data.perspective);
+    setRoomStatus(data.status);
+    if (data.gameState) {
+      setGameState(data.gameState);
+      setHandCount(data.gameState.handNumber);
     }
-    loadState();
+    setOpponentUsername(
+      data.perspective === 'human'
+        ? (data.player2Username ?? 'Opponent')
+        : (data.player1Username ?? 'Opponent')
+    );
   }, [roomId]);
+
+  // Load initial state on mount
+  useEffect(() => {
+    loadState();
+  }, [loadState]);
 
   // Pusher subscription
   useEffect(() => {
@@ -59,38 +68,36 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
     });
     const channel = pusher.subscribe(`game-${roomId}`);
 
-    channel.bind('game-start', (data: { gameState: GameState; player1Id: string; player2Id: string }) => {
-      setRoomStatus('active');
-      setGameState(data.gameState);
-      setHandCount(1);
+    // game-start: opponent joined — reload state from server to get correct filtered view
+    channel.bind('game-start', () => {
+      loadState();
     });
 
+    // state-update: a player acted — use ref to pick the correct player's state
     channel.bind('state-update', (data: { stateForP1: GameState; stateForP2: GameState }) => {
-      setPerspective(prev => {
-        const myState = prev === 'human' ? data.stateForP1 : data.stateForP2;
-        setGameState(myState);
-        if (myState.phase === 'complete') {
-          const result = myState.result;
-          if (result) {
-            const won = (prev === 'human' && result.winner === 'human') ||
-                        (prev === 'opponent' && result.winner === 'opponent');
-            const pnl = won ? result.potWon - myState.players[prev].totalBetThisHand
-                            : result.winner === 'split' ? 0
-                            : -myState.players[prev].totalBetThisHand;
-            setSessionPnl(p => p + pnl);
-          }
-        }
-        return prev;
-      });
+      const myState = perspectiveRef.current === 'human' ? data.stateForP1 : data.stateForP2;
+      setGameState(myState);
+      setIsSubmitting(false);
+      if (myState.phase === 'complete' && myState.result) {
+        const p = perspectiveRef.current;
+        const { winner, potWon } = myState.result;
+        const won = (p === 'human' && winner === 'human') || (p === 'opponent' && winner === 'opponent');
+        const pnl = won
+          ? potWon - myState.players[p].totalBetThisHand
+          : winner === 'split' ? 0
+          : -myState.players[p].totalBetThisHand;
+        setSessionPnl(prev => prev + pnl);
+      }
     });
 
     return () => {
       channel.unbind_all();
       pusher.unsubscribe(`game-${roomId}`);
     };
-  }, [roomId]);
+  }, [roomId, loadState]);
 
   const handleAction = useCallback(async (action: Action) => {
+    setIsSubmitting(true);
     await fetch('/api/game/action', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -99,17 +106,20 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
   }, [roomId]);
 
   const handleNewHand = useCallback(() => {
-    window.location.reload();
-  }, []);
+    loadState();
+  }, [loadState]);
 
   const myPlayer = gameState?.players[perspective];
-  const validActions: ValidActions | null = gameState && gameState.actionOn === perspective && gameState.phase !== 'complete'
-    ? getValidActions(gameState, perspective)
-    : null;
+  const validActions: ValidActions | null =
+    !isSubmitting &&
+    gameState &&
+    gameState.actionOn === perspective &&
+    gameState.phase !== 'complete'
+      ? getValidActions(gameState, perspective)
+      : null;
 
   const humanStack = myPlayer?.stack ?? 10000;
   const opponentStack = gameState?.players[perspective === 'human' ? 'opponent' : 'human']?.stack ?? 10000;
-
   const tableState = gameState ? remapForTable(gameState, perspective) : null;
 
   return (
@@ -140,7 +150,12 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
             validActions={validActions}
             onAction={handleAction}
             onNewHand={handleNewHand}
-            isOpponentThinking={gameState?.actionOn !== null && gameState?.actionOn !== perspective && gameState?.phase !== 'complete'}
+            isOpponentThinking={
+              !isSubmitting &&
+              gameState?.actionOn !== null &&
+              gameState?.actionOn !== perspective &&
+              gameState?.phase !== 'complete'
+            }
             opponentName={opponentUsername}
             myName={username}
           />
@@ -155,10 +170,8 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
   );
 }
 
-// Remap game state so that from PokerTable's perspective, the current player is always 'human'
 function remapForTable(gs: GameState, perspective: 'human' | 'opponent'): GameState {
   if (perspective === 'human') return gs;
-  // Swap human and opponent
   const remapped = JSON.parse(JSON.stringify(gs)) as GameState;
   const tmp = remapped.players.human;
   remapped.players.human = remapped.players.opponent;
@@ -168,7 +181,6 @@ function remapForTable(gs: GameState, perspective: 'human' | 'opponent'): GameSt
   if (remapped.result) {
     if (remapped.result.winner === 'human') remapped.result.winner = 'opponent';
     else if (remapped.result.winner === 'opponent') remapped.result.winner = 'human';
-    // Also swap opponentCards
     remapped.result.opponentCards = gs.players.human.holeCards;
   }
   return remapped;
