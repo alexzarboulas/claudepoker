@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { db } from '@/lib/db';
+import { db, updateLastSeen } from '@/lib/db';
 import { gameRooms, users } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 import { GameState } from '@/lib/types';
@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
   if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const userId = (session.user as { id?: string }).id;
+  if (userId) updateLastSeen(userId); // fire-and-forget
   const { searchParams } = new URL(req.url);
   const roomId = searchParams.get('roomId');
   if (!roomId) return NextResponse.json({ error: 'Missing roomId' }, { status: 400 });

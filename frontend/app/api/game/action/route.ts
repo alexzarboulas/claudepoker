@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { db } from '@/lib/db';
+import { db, updateLastSeen } from '@/lib/db';
 import { gameRooms, handHistory, playerStats } from '@/lib/db/schema';
 import { eq, sql } from 'drizzle-orm';
 import { pusherServer } from '@/lib/pusher';
@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
 
   const { roomId, action } = parsed.data;
+  if (userId) updateLastSeen(userId); // fire-and-forget
   const [room] = await db.select().from(gameRooms).where(eq(gameRooms.id, roomId));
   if (!room) return NextResponse.json({ error: 'Room not found' }, { status: 404 });
 

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import AuthSessionProvider from '@/components/SessionProvider';
+import FriendsWidget from '@/components/FriendsWidget';
 
 export const metadata: Metadata = {
   title: 'PokerIQ',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AuthSessionProvider>
           {children}
+          <FriendsWidget />
         </AuthSessionProvider>
       </body>
     </html>
