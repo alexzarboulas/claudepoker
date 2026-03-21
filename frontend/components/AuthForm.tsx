@@ -20,9 +20,14 @@ export default function AuthForm({ mode, onSubmit }: AuthFormProps) {
     e.preventDefault();
     setError('');
     setLoading(true);
-    const result = await onSubmit({ username: mode === 'register' ? username : undefined, email, password });
-    if (result?.error) setError(result.error);
-    setLoading(false);
+    try {
+      const result = await onSubmit({ username: mode === 'register' ? username : undefined, email, password });
+      if (result?.error) setError(result.error);
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
