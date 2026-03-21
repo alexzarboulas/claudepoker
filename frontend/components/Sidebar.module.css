@@ -22,11 +22,11 @@
   border: none;
   border-bottom: 2px solid transparent;
   color: var(--text-muted);
-  font-family: Georgia, serif;
-  font-size: 0.68rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   cursor: pointer;
   transition: all var(--t-fast);
   margin-bottom: -1px;
@@ -34,13 +34,13 @@
 
 .tab:hover {
   color: var(--text-secondary);
-  background: rgba(201, 168, 76, 0.04);
+  background: rgba(212, 168, 67, 0.04);
 }
 
 .tabActive {
   color: var(--gold-primary);
   border-bottom-color: var(--gold-primary);
-  background: rgba(201, 168, 76, 0.06);
+  background: rgba(212, 168, 67, 0.06);
 }
 
 /* Content area */
@@ -66,10 +66,11 @@
 }
 
 .emptyTitle {
-  font-family: Georgia, serif;
-  font-size: 0.95rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .emptyText {
@@ -84,16 +85,17 @@
   width: 100%;
   padding: 12px;
   border: 1px solid var(--border-subtle);
-  border-radius: 6px;
-  background: rgba(201, 168, 76, 0.04);
+  border-radius: 2px;
+  background: rgba(212, 168, 67, 0.04);
 }
 
 .gtoLabel {
   display: block;
-  font-size: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.16em;
   color: var(--gold-dim);
   margin-bottom: 6px;
 }
@@ -115,7 +117,7 @@
 }
 
 .tipCard {
-  border-radius: 8px;
+  border-radius: 2px;
   border: 1px solid;
   padding: 12px 14px;
   display: flex;
@@ -130,13 +132,13 @@
 }
 
 .tip_warning {
-  border-color: rgba(230, 81, 0, 0.35);
-  background: rgba(230, 81, 0, 0.06);
+  border-color: rgba(194, 91, 58, 0.35);
+  background: rgba(194, 91, 58, 0.06);
 }
 
 .tip_critical {
-  border-color: rgba(183, 28, 28, 0.5);
-  background: rgba(183, 28, 28, 0.08);
+  border-color: rgba(138, 26, 10, 0.5);
+  background: rgba(138, 26, 10, 0.08);
 }
 
 .tipHeader {
@@ -153,20 +155,21 @@
 }
 
 .tip_info    .tipSeverityDot { background: var(--gold-dim); }
-.tip_warning .tipSeverityDot { background: #ff7043; }
-.tip_critical .tipSeverityDot { background: #ef5350; }
+.tip_warning .tipSeverityDot { background: var(--terracotta, #c25b3a); }
+.tip_critical .tipSeverityDot { background: var(--red-bright); }
 
 .tipSeverityLabel {
-  font-size: 0.62rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   flex: 1;
 }
 
 .tip_info     .tipSeverityLabel { color: var(--gold-dim); }
-.tip_warning  .tipSeverityLabel { color: #ff7043; }
-.tip_critical .tipSeverityLabel { color: #ef5350; }
+.tip_warning  .tipSeverityLabel { color: #d47a4a; }
+.tip_critical .tipSeverityLabel { color: var(--red-bright); }
 
 .tipTime {
   font-size: 0.6rem;
@@ -175,9 +178,10 @@
 }
 
 .tipText {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-secondary);
   line-height: 1.65;
+  font-family: 'Crimson Text', Georgia, serif;
 }
 
 /* ---- Stats tab ---- */
@@ -190,11 +194,11 @@
 
 .sampleWarning {
   font-size: 0.72rem;
-  color: #ff7043;
-  background: rgba(255, 112, 67, 0.08);
-  border: 1px solid rgba(255, 112, 67, 0.25);
+  color: #d47a4a;
+  background: rgba(194, 91, 58, 0.08);
+  border: 1px solid rgba(194, 91, 58, 0.25);
   padding: 7px 10px;
-  border-radius: 5px;
+  border-radius: 2px;
   display: flex;
   gap: 6px;
   align-items: center;
@@ -213,10 +217,11 @@
 }
 
 .statLabel {
-  font-size: 0.68rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--text-secondary);
 }
 
@@ -226,9 +231,9 @@
   font-weight: 700;
 }
 
-.statGood    { color: #66bb6a; }
-.statWarn    { color: #ffa726; }
-.statBad     { color: #ef5350; }
+.statGood    { color: #6abf6e; }
+.statWarn    { color: #d4a843; }
+.statBad     { color: var(--red-bright); }
 .statNeutral { color: var(--text-muted); }
 
 .track {
@@ -245,9 +250,9 @@
   transition: width 400ms ease;
 }
 
-.statGood .fill, .fill.statGood { background: linear-gradient(90deg, #1b5e20, #66bb6a); }
-.statWarn .fill, .fill.statWarn { background: linear-gradient(90deg, #bf360c, #ffa726); }
-.statBad  .fill, .fill.statBad  { background: linear-gradient(90deg, #7f0000, #ef5350); }
+.statGood .fill, .fill.statGood { background: linear-gradient(90deg, #1a4f8a, #6abf6e); }
+.statWarn .fill, .fill.statWarn { background: linear-gradient(90deg, #8a6e28, #d4a843); }
+.statBad  .fill, .fill.statBad  { background: linear-gradient(90deg, #5c1810, var(--red-bright)); }
 .statNeutral .fill, .fill.statNeutral { background: rgba(255,255,255,0.15); }
 
 .baselineMarker {
@@ -289,7 +294,7 @@
 
 .handRow {
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(212,168,67,0.06);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -298,7 +303,7 @@
 }
 
 .handRow:hover {
-  background: rgba(255,255,255,0.02);
+  background: rgba(212,168,67,0.03);
 }
 
 .handMeta {
@@ -319,8 +324,8 @@
   font-weight: 700;
 }
 
-.result_won  { color: #4caf50; }
-.result_lost { color: #ef5350; }
+.result_won  { color: #6abf6e; }
+.result_lost { color: var(--red-bright); }
 .result_split{ color: #90caf9; }
 
 .handBoard {
