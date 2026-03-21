@@ -1,0 +1,160 @@
+/* =====================================================
+   PokerIQ — Casino Design System
+   ===================================================== */
+
+:root {
+  /* Felt */
+  --felt-bg:        #0b1f14;
+  --felt-center:    #0e2818;
+  --felt-edge:      #071510;
+  --felt-rim:       #1a3d22;
+  --felt-rim-light: #235c2e;
+
+  /* Gold */
+  --gold-primary:   #d4af50;
+  --gold-light:     #f0d470;
+  --gold-dim:       #8a7030;
+  --gold-glow:      rgba(212, 175, 80, 0.35);
+
+  /* Card */
+  --card-face:      #faf8f2;
+  --card-back-top:  #1a2a6c;
+  --card-back-bot:  #0d1640;
+  --card-shadow:    rgba(0, 0, 0, 0.7);
+  --card-border:    rgba(255,255,255,0.12);
+
+  /* Suits */
+  --red:            #d32f2f;
+  --red-bright:     #f44336;
+  --black:          #1a1a1a;
+
+  /* UI Surfaces */
+  --bg-page:        #080e0b;
+  --bg-sidebar:     #0c1510;
+  --bg-panel:       #111e16;
+  --bg-input:       #0f1a12;
+  --border-subtle:  rgba(212, 175, 80, 0.15);
+  --border-mid:     rgba(212, 175, 80, 0.3);
+
+  /* Text */
+  --text-primary:   #e8dfc8;
+  --text-secondary: #9a8f78;
+  --text-muted:     #5a5448;
+  --text-gold:      #d4af50;
+
+  /* Action buttons */
+  --btn-fold:       #3a0f0f;
+  --btn-fold-hover: #5c1818;
+  --btn-call:       #0f2e12;
+  --btn-call-hover: #1a4a1e;
+  --btn-raise:      #0f1e3a;
+  --btn-raise-hover:#1a2e5c;
+
+  /* Chip colors */
+  --chip-red:       #cc2222;
+  --chip-blue:      #2255cc;
+  --chip-black:     #222222;
+  --chip-green:     #22882a;
+
+  /* Stats */
+  --stat-good:      #2e7d32;
+  --stat-warn:      #e65100;
+  --stat-bad:       #b71c1c;
+
+  /* Layout */
+  --topbar-h:       56px;
+  --sidebar-w:      300px;
+  --action-h:       120px;
+
+  /* Transitions */
+  --t-fast:         120ms ease;
+  --t-med:          250ms ease;
+  --t-slow:         400ms ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#__next { height: 100%; }
+
+/* ---- Typography ---- */
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--text-gold); letter-spacing: 0.04em; }
+
+.mono {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Scrollbars ---- */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-panel); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* ---- Card deal animation ---- */
+@keyframes dealCard {
+  from {
+    opacity: 0;
+    transform: translate(-60px, -30px) rotate(-12deg) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes flipCard {
+  0%   { transform: rotateY(0deg); }
+  50%  { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+@keyframes chipSlide {
+  from { transform: translateY(-12px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+@keyframes potPulse {
+  0%, 100% { text-shadow: 0 0 8px var(--gold-glow); }
+  50%       { text-shadow: 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes winnerGlow {
+  0%, 100% { box-shadow: 0 0 0 2px var(--gold-primary); }
+  50%       { box-shadow: 0 0 0 4px var(--gold-primary), 0 0 24px var(--gold-glow); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-4px); }
+  40%       { transform: translateX(4px); }
+  60%       { transform: translateX(-3px); }
+  80%       { transform: translateX(3px); }
+}
+
+/* ---- Utility classes ---- */
+.gold-text    { color: var(--text-gold); }
+.muted-text   { color: var(--text-secondary); }
+.chip-amount  { font-family: 'Courier New', monospace; font-weight: bold; font-size: 0.85em; letter-spacing: 0.08em; }
+.divider      { height: 1px; background: var(--border-subtle); margin: 12px 0; }

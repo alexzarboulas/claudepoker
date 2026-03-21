@@ -1,0 +1,153 @@
+.landing {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-page);
+  position: relative;
+  overflow: hidden;
+}
+
+.suitsBg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
+  font-size: 18rem;
+  opacity: 0.03;
+  color: var(--gold-primary);
+  pointer-events: none;
+  user-select: none;
+  animation: suitsDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes suitsDrift {
+  from { transform: scale(1) rotate(-2deg); }
+  to   { transform: scale(1.05) rotate(2deg); }
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  padding: 48px 32px;
+  max-width: 520px;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logoIcon {
+  font-size: 3.5rem;
+  color: var(--gold-primary);
+  filter: drop-shadow(0 0 16px var(--gold-glow));
+  line-height: 1;
+}
+
+.logoText {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 40px var(--gold-glow);
+  margin: 0;
+}
+
+.tagline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.sub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.ctaRow {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.ctaPrimary {
+  padding: 14px 36px;
+  background: var(--gold-primary);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: background var(--t-fast), box-shadow var(--t-fast);
+  box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+.ctaPrimary:hover {
+  background: var(--gold-light);
+  box-shadow: 0 4px 32px var(--gold-glow);
+}
+
+.ctaSecondary {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--gold-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid var(--border-mid);
+  letter-spacing: 0.04em;
+  transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.ctaSecondary:hover {
+  background: rgba(212,175,80,0.08);
+  border-color: var(--gold-primary);
+}
+
+.features {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.featureIcon {
+  color: var(--gold-dim);
+}
+
+/* Keep the old game layout styles for the game page */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}

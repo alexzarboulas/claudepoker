@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(npx create-next-app@latest frontend --typescript --tailwind=false --eslint=false --app --src-dir=false --import-alias=\"@/*\" --use-npm)",
+      "Bash(npx create-next-app@latest frontend --typescript --tailwind=false --eslint=false --app --src-dir=false --import-alias=\"@/*\" --use-npm --no-eslint)",
+      "Bash(mkdir -p frontend)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(open http://localhost:3000)",
+      "Bash(mkdir -p \"/Users/alexzarboulas/Desktop/claudepoker/frontend/app/api/auth/[...nextauth]\")",
+      "Bash(mkdir -p \"/Users/alexzarboulas/Desktop/claudepoker/frontend/app/game/[roomId]\")",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"const t = require\\(''''./node_modules/drizzle-kit/api''''\\); console.log\\(Object.keys\\(t\\)\\)\")",
+      "Bash(openssl rand:*)",
+      "Bash(npx drizzle-kit:*)",
+      "Bash(DATABASE_URL=\"postgresql://neondb_owner:npg_y7r2DIXQLflH@ep-small-lake-amk76723-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require\" npx drizzle-kit push)",
+      "Bash(git rm:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(rm -rf .git)",
+      "Bash(git init:*)"
+    ]
+  }
+}

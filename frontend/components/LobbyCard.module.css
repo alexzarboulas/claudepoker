@@ -1,0 +1,215 @@
+.lobby {
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.logoSmall {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.06em;
+}
+
+.greeting {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.greeting strong {
+  color: var(--text-primary);
+}
+
+.cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 760px;
+}
+
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 32px 28px;
+  flex: 1;
+  min-width: 280px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 300ms ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cardTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--text-gold);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.primaryBtn {
+  padding: 13px 24px;
+  background: var(--gold-primary);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background var(--t-fast);
+  box-shadow: 0 4px 16px var(--gold-glow);
+}
+
+.primaryBtn:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.codeDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.codeLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.codeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-mid);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.code {
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.12em;
+  flex: 1;
+  text-align: center;
+}
+
+.copyBtn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border-mid);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.copyBtn:hover {
+  color: var(--gold-primary);
+  border-color: var(--gold-primary);
+}
+
+.waiting {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.waitDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.waitDot:nth-child(2) { animation-delay: 0.2s; }
+.waitDot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%       { opacity: 1; transform: scale(1); }
+}
+
+.joinForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.codeInput {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1.4rem;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.12em;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.codeInput:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 80, 0.15);
+}
+
+.codeInput::placeholder {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+.error {
+  background: rgba(183, 28, 28, 0.15);
+  border: 1px solid rgba(183, 28, 28, 0.4);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  color: #ef5350;
+  max-width: 760px;
+  width: 100%;
+  text-align: center;
+}

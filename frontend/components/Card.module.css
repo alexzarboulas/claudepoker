@@ -1,0 +1,125 @@
+.card {
+  width: 72px;
+  height: 100px;
+  border-radius: 8px;
+  position: relative;
+  flex-shrink: 0;
+  border: 1px solid var(--card-border);
+  box-shadow:
+    0 4px 12px var(--card-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  animation: dealCard var(--t-slow) both;
+  transition: transform var(--t-med), box-shadow var(--t-med);
+}
+
+.small {
+  width: 52px;
+  height: 72px;
+  border-radius: 6px;
+}
+
+.small .rank       { font-size: 0.8rem; }
+.small .suitSmall  { font-size: 0.65rem; }
+.small .centerSuit { font-size: 1.6rem; }
+
+.cardSlot {
+  width: 72px;
+  height: 100px;
+  border-radius: 8px;
+  border: 2px dashed rgba(201, 168, 76, 0.15);
+  flex-shrink: 0;
+}
+
+.faceUp {
+  background: var(--card-face);
+  cursor: default;
+}
+
+.faceDown {
+  background: linear-gradient(135deg, var(--card-back-top), var(--card-back-bot));
+  overflow: hidden;
+}
+
+.backPattern {
+  position: absolute;
+  inset: 5px;
+  border: 2px solid rgba(201, 168, 76, 0.25);
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+}
+
+.backPattern::after {
+  content: '♠';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  color: rgba(201, 168, 76, 0.25);
+  pointer-events: none;
+}
+
+/* Suit colors */
+.red  { color: var(--red); }
+.black { color: var(--black); }
+
+/* Layout within card */
+.corner {
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.bottomRight {
+  top: auto;
+  left: auto;
+  bottom: 6px;
+  right: 7px;
+  transform: rotate(180deg);
+}
+
+.rank {
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+  line-height: 1;
+}
+
+.suitSmall {
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.centerSuit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.2rem;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* Winner highlight */
+.winner {
+  animation: winnerGlow 1.2s ease-in-out infinite, dealCard var(--t-slow) both;
+  z-index: 2;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 20px var(--card-shadow),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}

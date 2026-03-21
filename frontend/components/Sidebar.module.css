@@ -1,0 +1,342 @@
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+  border-left: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Tab bar */
+.tabBar {
+  display: flex;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: Georgia, serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--text-secondary);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.tabActive {
+  color: var(--gold-primary);
+  border-bottom-color: var(--gold-primary);
+  background: rgba(201, 168, 76, 0.06);
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ---- Empty state ---- */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 2rem;
+  opacity: 0.3;
+}
+
+.emptyTitle {
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.emptyText {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 200px;
+}
+
+.gtoNote {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.gtoLabel {
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim);
+  margin-bottom: 6px;
+}
+
+.gtoStats {
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ---- Tutor tab ---- */
+.tipsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+}
+
+.tipCard {
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: slideInRight var(--t-med) both;
+}
+
+.tip_info {
+  border-color: var(--border-subtle);
+  background: rgba(255,255,255,0.02);
+}
+
+.tip_warning {
+  border-color: rgba(230, 81, 0, 0.35);
+  background: rgba(230, 81, 0, 0.06);
+}
+
+.tip_critical {
+  border-color: rgba(183, 28, 28, 0.5);
+  background: rgba(183, 28, 28, 0.08);
+}
+
+.tipHeader {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.tipSeverityDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tip_info    .tipSeverityDot { background: var(--gold-dim); }
+.tip_warning .tipSeverityDot { background: #ff7043; }
+.tip_critical .tipSeverityDot { background: #ef5350; }
+
+.tipSeverityLabel {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  flex: 1;
+}
+
+.tip_info     .tipSeverityLabel { color: var(--gold-dim); }
+.tip_warning  .tipSeverityLabel { color: #ff7043; }
+.tip_critical .tipSeverityLabel { color: #ef5350; }
+
+.tipTime {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+}
+
+.tipText {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ---- Stats tab ---- */
+.statsWrap {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sampleWarning {
+  font-size: 0.72rem;
+  color: #ff7043;
+  background: rgba(255, 112, 67, 0.08);
+  border: 1px solid rgba(255, 112, 67, 0.25);
+  padding: 7px 10px;
+  border-radius: 5px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.statBar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.statTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.statLabel {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.statValue {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.statGood    { color: #66bb6a; }
+.statWarn    { color: #ffa726; }
+.statBad     { color: #ef5350; }
+.statNeutral { color: var(--text-muted); }
+
+.track {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  position: relative;
+  overflow: visible;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 400ms ease;
+}
+
+.statGood .fill, .fill.statGood { background: linear-gradient(90deg, #1b5e20, #66bb6a); }
+.statWarn .fill, .fill.statWarn { background: linear-gradient(90deg, #bf360c, #ffa726); }
+.statBad  .fill, .fill.statBad  { background: linear-gradient(90deg, #7f0000, #ef5350); }
+.statNeutral .fill, .fill.statNeutral { background: rgba(255,255,255,0.15); }
+
+.baselineMarker {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 12px;
+  background: var(--gold-dim);
+  border-radius: 1px;
+  transform: translateX(-50%);
+  opacity: 0.7;
+}
+
+.statMeta {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.statMetaLabel {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+}
+
+.sampleCount {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.08em;
+  padding-top: 4px;
+}
+
+/* ---- History tab ---- */
+.historyWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.handRow {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeIn var(--t-fast) both;
+  transition: background var(--t-fast);
+}
+
+.handRow:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.handMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.handNum {
+  font-family: 'Courier New', monospace;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.handResult {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.result_won  { color: #4caf50; }
+.result_lost { color: #ef5350; }
+.result_split{ color: #90caf9; }
+
+.handBoard {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.preflopOnly {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.handAction {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
