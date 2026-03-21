@@ -8,37 +8,123 @@
   overflow: hidden;
 }
 
-.suitsBg {
+.bgGradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(26, 79, 138, 0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(10, 30, 58, 0.8) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 20%, rgba(240,236,224,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 8%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 15%, rgba(240,236,224,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 72% 6%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 88% 22%, rgba(240,236,224,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 35%, rgba(240,236,224,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 40%, rgba(240,236,224,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 25%, rgba(212,168,67,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 62% 32%, rgba(240,236,224,0.2) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Greek columns on left and right */
+.columns {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 120px;
-  font-size: 18rem;
-  opacity: 0.03;
-  color: var(--gold-primary);
+  justify-content: space-between;
+  align-items: flex-end;
   pointer-events: none;
-  user-select: none;
-  animation: suitsDrift 20s ease-in-out infinite alternate;
+  padding: 0 48px;
+  opacity: 0.12;
 }
 
-@keyframes suitsDrift {
-  from { transform: scale(1) rotate(-2deg); }
-  to   { transform: scale(1.05) rotate(2deg); }
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+  animation: columnRise 1.2s ease both;
 }
 
+.column:last-child {
+  animation-delay: 0.2s;
+}
+
+.colCapital {
+  width: 60px;
+  height: 20px;
+  background: linear-gradient(to bottom, #f0ece0, #d4a843);
+  border-radius: 4px 4px 0 0;
+}
+
+.colShaft {
+  width: 44px;
+  flex: 1;
+  background: linear-gradient(to right, #c8c0b0, #f0ece0, #c8c0b0);
+  position: relative;
+}
+
+.colShaft::before,
+.colShaft::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: rgba(212,168,67,0.4);
+}
+
+.colShaft::before { top: 25%; }
+.colShaft::after  { top: 50%; }
+
+.colBase {
+  width: 64px;
+  height: 24px;
+  background: linear-gradient(to top, #d4a843, #f0ece0);
+  border-radius: 0 0 4px 4px;
+}
+
+/* Hero content */
 .hero {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   text-align: center;
-  padding: 48px 32px;
-  max-width: 520px;
+  padding: 48px 48px;
+  max-width: 580px;
+  background: rgba(10, 30, 58, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  animation: fadeIn 600ms ease both;
 }
+
+/* Meander decorative borders (pure CSS Greek key pattern simulation) */
+.meanderTop,
+.meanderBottom {
+  width: 100%;
+  height: 8px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--gold-dim) 0px,
+    var(--gold-dim) 8px,
+    transparent 8px,
+    transparent 10px
+  );
+  opacity: 0.5;
+}
+
+.meanderTop { margin-bottom: 8px; }
+.meanderBottom { margin-top: 8px; }
 
 .logoWrap {
   display: flex;
@@ -47,27 +133,46 @@
 }
 
 .logoIcon {
-  font-size: 3.5rem;
+  font-size: 3rem;
   color: var(--gold-primary);
   filter: drop-shadow(0 0 16px var(--gold-glow));
   line-height: 1;
 }
 
 .logoText {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 4rem;
-  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  font-size: 3.8rem;
+  font-weight: 900;
   color: var(--gold-primary);
-  letter-spacing: 0.06em;
-  text-shadow: 0 0 40px var(--gold-glow);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 40px var(--gold-glow), 0 2px 4px rgba(0,0,0,0.5);
   margin: 0;
 }
 
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+.subtitleAccent {
+  color: var(--gold-dim);
+}
+
+.subtitleText {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+}
+
 .tagline {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.4rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
   color: var(--text-primary);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
 .sub {
@@ -82,16 +187,18 @@
 }
 
 .ctaPrimary {
-  padding: 14px 36px;
+  padding: 14px 40px;
   background: var(--gold-primary);
   color: #0a0a0a;
+  font-family: 'Cinzel', serif;
   font-weight: 700;
-  font-size: 1rem;
-  border-radius: 999px;
+  font-size: 0.9rem;
+  border-radius: 2px;
   text-decoration: none;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
   transition: background var(--t-fast), box-shadow var(--t-fast);
   box-shadow: 0 4px 20px var(--gold-glow);
+  text-transform: uppercase;
 }
 
 .ctaPrimary:hover {
@@ -100,27 +207,29 @@
 }
 
 .ctaSecondary {
-  padding: 14px 36px;
+  padding: 14px 40px;
   background: transparent;
   color: var(--gold-primary);
+  font-family: 'Cinzel', serif;
   font-weight: 600;
-  font-size: 1rem;
-  border-radius: 999px;
+  font-size: 0.9rem;
+  border-radius: 2px;
   text-decoration: none;
   border: 1px solid var(--border-mid);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   transition: background var(--t-fast), border-color var(--t-fast);
 }
 
 .ctaSecondary:hover {
-  background: rgba(212,175,80,0.08);
+  background: rgba(212,168,67,0.08);
   border-color: var(--gold-primary);
 }
 
 .features {
   display: flex;
-  gap: 24px;
-  margin-top: 16px;
+  gap: 32px;
+  margin-top: 8px;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -129,15 +238,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
   color: var(--text-secondary);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
 }
 
 .featureIcon {
-  color: var(--gold-dim);
+  font-size: 1.1rem;
 }
 
-/* Keep the old game layout styles for the game page */
+/* Keep game layout styles */
 .app {
   display: flex;
   flex-direction: column;

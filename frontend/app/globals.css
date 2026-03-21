@@ -1,65 +1,65 @@
 /* =====================================================
-   PokerIQ — Casino Design System
+   PokerIQ — Hellenic Design System
    ===================================================== */
 
 :root {
-  /* Felt */
-  --felt-bg:        #0b1f14;
-  --felt-center:    #0e2818;
-  --felt-edge:      #071510;
-  --felt-rim:       #1a3d22;
-  --felt-rim-light: #235c2e;
+  /* Aegean Sea */
+  --felt-bg:        #0e2d52;
+  --felt-center:    #0a2244;
+  --felt-edge:      #07182e;
+  --felt-rim:       #1a4f8a;
+  --felt-rim-light: #2563a0;
 
-  /* Gold */
-  --gold-primary:   #d4af50;
-  --gold-light:     #f0d470;
-  --gold-dim:       #8a7030;
-  --gold-glow:      rgba(212, 175, 80, 0.35);
+  /* Hellenic Gold */
+  --gold-primary:   #d4a843;
+  --gold-light:     #f0c857;
+  --gold-dim:       #8a6e28;
+  --gold-glow:      rgba(212, 168, 67, 0.35);
 
   /* Card */
   --card-face:      #faf8f2;
-  --card-back-top:  #1a2a6c;
-  --card-back-bot:  #0d1640;
+  --card-back-top:  #1a3a6e;
+  --card-back-bot:  #0d2040;
   --card-shadow:    rgba(0, 0, 0, 0.7);
   --card-border:    rgba(255,255,255,0.12);
 
-  /* Suits */
-  --red:            #d32f2f;
-  --red-bright:     #f44336;
+  /* Suits — terracotta red like Greek pottery */
+  --red:            #c25b3a;
+  --red-bright:     #d44a2a;
   --black:          #1a1a1a;
 
-  /* UI Surfaces */
-  --bg-page:        #080e0b;
-  --bg-sidebar:     #0c1510;
-  --bg-panel:       #111e16;
-  --bg-input:       #0f1a12;
-  --border-subtle:  rgba(212, 175, 80, 0.15);
-  --border-mid:     rgba(212, 175, 80, 0.3);
+  /* UI Surfaces — dark marble and midnight navy */
+  --bg-page:        #070d1a;
+  --bg-sidebar:     #0a1628;
+  --bg-panel:       #0d1e30;
+  --bg-input:       #091525;
+  --border-subtle:  rgba(212, 168, 67, 0.15);
+  --border-mid:     rgba(212, 168, 67, 0.3);
 
-  /* Text */
-  --text-primary:   #e8dfc8;
-  --text-secondary: #9a8f78;
-  --text-muted:     #5a5448;
-  --text-gold:      #d4af50;
+  /* Text — warm marble white */
+  --text-primary:   #f0ece0;
+  --text-secondary: #b0a898;
+  --text-muted:     #6a6058;
+  --text-gold:      #d4a843;
 
   /* Action buttons */
-  --btn-fold:       #3a0f0f;
-  --btn-fold-hover: #5c1818;
-  --btn-call:       #0f2e12;
-  --btn-call-hover: #1a4a1e;
-  --btn-raise:      #0f1e3a;
-  --btn-raise-hover:#1a2e5c;
+  --btn-fold:       #3a0e08;
+  --btn-fold-hover: #5c1810;
+  --btn-call:       #082830;
+  --btn-call-hover: #0f3d4a;
+  --btn-raise:      #081828;
+  --btn-raise-hover:#0f2a40;
 
   /* Chip colors */
-  --chip-red:       #cc2222;
-  --chip-blue:      #2255cc;
+  --chip-red:       #c25b3a;
+  --chip-blue:      #1a4f8a;
   --chip-black:     #222222;
-  --chip-green:     #22882a;
+  --chip-green:     #5a6e28;
 
   /* Stats */
-  --stat-good:      #2e7d32;
-  --stat-warn:      #e65100;
-  --stat-bad:       #b71c1c;
+  --stat-good:      #3a6e28;
+  --stat-warn:      #c25b3a;
+  --stat-bad:       #8a1a0a;
 
   /* Layout */
   --topbar-h:       56px;
@@ -83,14 +83,15 @@ html, body {
   overflow: hidden;
   background: var(--bg-page);
   color: var(--text-primary);
-  font-family: 'Georgia', 'Times New Roman', serif;
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 
 #__next { height: 100%; }
 
 /* ---- Typography ---- */
-h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--text-gold); letter-spacing: 0.04em; }
+h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--text-gold); letter-spacing: 0.06em; }
 
 .mono {
   font-family: 'Courier New', monospace;
@@ -102,7 +103,7 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--text-
 ::-webkit-scrollbar-track { background: var(--bg-panel); }
 ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
 
-/* ---- Card deal animation ---- */
+/* ---- Animations ---- */
 @keyframes dealCard {
   from {
     opacity: 0;
@@ -151,6 +152,24 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--text-
   40%       { transform: translateX(4px); }
   60%       { transform: translateX(-3px); }
   80%       { transform: translateX(3px); }
+}
+
+@keyframes columnRise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Meander (Greek key) border utility ---- */
+.meander-border {
+  border: 2px solid var(--gold-dim);
+  position: relative;
+}
+.meander-border::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  pointer-events: none;
 }
 
 /* ---- Utility classes ---- */

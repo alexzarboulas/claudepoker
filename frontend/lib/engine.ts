@@ -205,6 +205,8 @@ function isBettingClosed(state: GameState): boolean {
   if (actions.length === 0) return false;
 
   const lastAct = actions[actions.length - 1];
+  const prevActions = actions.slice(0, -1);
+  const otherPlayer = lastAct.player === 'human' ? 'opponent' : 'human';
 
   // If bets are unequal, action is still open
   if (!human.isAllIn && !opponent.isAllIn && human.betThisStreet !== opponent.betThisStreet) {
@@ -216,8 +218,22 @@ function isBettingClosed(state: GameState): boolean {
     return lastAct.action === 'call' || lastAct.action === 'check' || lastAct.action === 'allin';
   }
 
-  // Bets are equal — street ends on check or call
-  return lastAct.action === 'check' || lastAct.action === 'call';
+  // Bets are equal — need both players to have had a chance to act
+  if (lastAct.action === 'check') {
+    // A check closes the street only if the other player has already acted this street.
+    // This prevents the first actor's check from skipping the second player's turn.
+    return prevActions.some(a => a.player === otherPlayer);
+  }
+
+  if (lastAct.action === 'call') {
+    // A call closes the street only if there was a voluntary bet/raise in streetActions.
+    // This handles the preflop BB option: when BTN limps (calls the blind), the BB blind
+    // was not a streetAction, so BB still gets their option to raise.
+    return prevActions.some(a => a.action === 'bet' || a.action === 'raise' || a.action === 'allin');
+  }
+
+  // A bet/raise never closes the street — other player must respond
+  return false;
 }
 
 function advanceState(state: GameState): GameState {

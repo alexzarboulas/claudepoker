@@ -6,7 +6,7 @@
   position: relative;
 }
 
-/* The oval felt table */
+/* The oval Aegean felt table */
 .table {
   flex: 1;
   position: relative;
@@ -17,12 +17,12 @@
   padding: 24px 40px;
   overflow: hidden;
 
-  /* Felt texture via radial gradient layers */
+  /* Aegean blue felt */
   background:
-    radial-gradient(ellipse 80% 70% at 50% 50%, var(--felt-center) 0%, var(--felt-bg) 60%, var(--felt-edge) 100%);
+    radial-gradient(ellipse at center, #0a2244 0%, #0e2d52 50%, #07182e 100%);
 }
 
-/* Inner oval rim */
+/* Inner oval rim — Hellenic gold double-line */
 .rim {
   position: absolute;
   top: 12px;
@@ -30,23 +30,24 @@
   left: 5%;
   right: 5%;
   border-radius: 50%;
-  border: 3px solid var(--felt-rim);
+  border: 3px solid var(--gold-dim);
   box-shadow:
-    inset 0 0 40px rgba(0,0,0,0.5),
-    0 0 0 1px var(--felt-rim-light),
-    0 0 30px rgba(0,0,0,0.4);
+    0 0 0 1px var(--gold-primary),
+    0 0 60px rgba(10,30,80,0.8),
+    inset 0 0 60px rgba(0,0,30,0.5),
+    inset 0 0 0 4px rgba(212,168,67,0.08);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Subtle felt texture dots */
+/* Subtle wave texture on felt */
 .table::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 12px 12px;
+    radial-gradient(circle, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 14px 14px;
   pointer-events: none;
   z-index: 0;
 }
@@ -71,11 +72,12 @@
 }
 
 .playerName {
-  font-size: 0.78rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 }
 
 .playerStack {
@@ -90,7 +92,7 @@
   height: 22px;
   border-radius: 50%;
   background: var(--gold-primary);
-  color: #0a1a0f;
+  color: #07182e;
   font-size: 0.65rem;
   font-weight: 900;
   display: flex;
@@ -138,9 +140,10 @@
 }
 
 .potLabel {
-  font-size: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: var(--text-muted);
   text-transform: uppercase;
 }
@@ -156,11 +159,11 @@
 
 /* Phase label */
 .phaseLabel {
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
   color: var(--text-muted);
   text-transform: uppercase;
-  font-family: Georgia, serif;
 }
 
 /* Last action */
@@ -249,17 +252,18 @@
 }
 
 .startLogo {
-  font-family: Georgia, serif;
+  font-family: 'Cinzel', serif;
   font-size: 4rem;
   font-weight: 700;
   color: var(--gold-primary);
-  text-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(201,168,76,0.2);
-  letter-spacing: 0.08em;
+  text-shadow: 0 0 40px var(--gold-glow), 0 0 80px rgba(212,168,67,0.2);
+  letter-spacing: 0.1em;
 }
 
 .startSub {
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
   color: var(--text-secondary);
   text-transform: uppercase;
 }
@@ -269,12 +273,12 @@
   padding: 14px 40px;
   background: transparent;
   border: 2px solid var(--gold-primary);
-  border-radius: 4px;
+  border-radius: 2px;
   color: var(--gold-primary);
-  font-family: Georgia, serif;
-  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all var(--t-med);
@@ -282,7 +286,7 @@
 
 .startBtn:hover {
   background: var(--gold-primary);
-  color: #0a1a0f;
+  color: #07182e;
   box-shadow: 0 0 24px var(--gold-glow);
   transform: translateY(-2px);
 }
@@ -294,7 +298,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(8, 16, 13, 0.75);
+  background: rgba(7, 13, 26, 0.75);
   z-index: 20;
   backdrop-filter: blur(4px);
   animation: fadeIn var(--t-med) both;
@@ -306,17 +310,26 @@
   align-items: center;
   gap: 10px;
   padding: 36px 48px;
-  border-radius: 12px;
+  border-radius: 4px;
   border: 1px solid;
-  background: var(--bg-panel);
+  background: #0d1e30;
   box-shadow: 0 16px 48px rgba(0,0,0,0.7);
   animation: fadeIn var(--t-med) both;
   min-width: 260px;
+  position: relative;
+}
+
+.resultCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 24px; right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
 }
 
 .resultWin {
   border-color: var(--gold-primary);
-  box-shadow: 0 0 0 1px var(--gold-dim), 0 16px 48px rgba(0,0,0,0.7), 0 0 40px rgba(201,168,76,0.15);
+  box-shadow: 0 0 0 1px var(--gold-dim), 0 16px 48px rgba(0,0,0,0.7), 0 0 40px rgba(212,168,67,0.15);
 }
 
 .resultLoss {
@@ -333,14 +346,14 @@
 }
 
 .resultWin .resultIcon   { color: var(--gold-primary); text-shadow: 0 0 16px var(--gold-glow); }
-.resultLoss .resultIcon  { color: #ef5350; }
+.resultLoss .resultIcon  { color: var(--red-bright); }
 .resultSplit .resultIcon { color: #64b5f6; }
 
 .resultTitle {
-  font-family: Georgia, serif;
+  font-family: 'Cinzel', serif;
   font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .resultWin .resultTitle   { color: var(--gold-primary); }
@@ -354,14 +367,15 @@
   letter-spacing: 0.05em;
 }
 
-.resultWin .resultAmount   { color: #4caf50; }
-.resultLoss .resultAmount  { color: #ef5350; }
+.resultWin .resultAmount   { color: #6abf6e; }
+.resultLoss .resultAmount  { color: var(--red-bright); }
 .resultSplit .resultAmount { color: var(--text-secondary); }
 
 .resultHand {
-  font-size: 0.78rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
   color: var(--text-muted);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -370,19 +384,20 @@
   padding: 10px 28px;
   background: transparent;
   border: 1px solid var(--gold-dim);
-  border-radius: 4px;
+  border-radius: 2px;
   color: var(--gold-primary);
-  font-family: Georgia, serif;
-  font-size: 0.85rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all var(--t-fast);
 }
 
 .nextHandBtn:hover {
   background: var(--gold-primary);
-  color: #0a1a0f;
+  color: #07182e;
   border-color: var(--gold-primary);
   box-shadow: 0 0 12px var(--gold-glow);
 }

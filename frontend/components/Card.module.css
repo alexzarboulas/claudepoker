@@ -26,7 +26,7 @@
   width: 72px;
   height: 100px;
   border-radius: 8px;
-  border: 2px dashed rgba(201, 168, 76, 0.15);
+  border: 2px dashed rgba(212, 168, 67, 0.15);
   flex-shrink: 0;
 }
 
@@ -38,31 +38,37 @@
 .faceDown {
   background: linear-gradient(135deg, var(--card-back-top), var(--card-back-bot));
   overflow: hidden;
+  box-shadow:
+    0 4px 12px var(--card-shadow),
+    inset 0 0 0 4px rgba(212,168,67,0.3),
+    inset 0 0 0 6px rgba(10,34,68,0.8),
+    inset 0 0 0 10px rgba(212,168,67,0.15);
 }
 
 .backPattern {
   position: absolute;
-  inset: 5px;
-  border: 2px solid rgba(201, 168, 76, 0.25);
-  border-radius: 4px;
+  inset: 8px;
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  border-radius: 3px;
   background:
     repeating-linear-gradient(
       45deg,
-      rgba(255,255,255,0.03) 0px,
-      rgba(255,255,255,0.03) 1px,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
       transparent 1px,
       transparent 6px
     );
 }
 
 .backPattern::after {
-  content: '♠';
+  content: 'Ω';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.6rem;
-  color: rgba(201, 168, 76, 0.25);
+  font-size: 1.8rem;
+  font-family: 'Cinzel', serif;
+  color: rgba(212, 168, 67, 0.3);
   pointer-events: none;
 }
 
@@ -92,7 +98,7 @@
 .rank {
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   line-height: 1;
 }
 

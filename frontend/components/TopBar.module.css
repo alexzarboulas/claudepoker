@@ -1,7 +1,7 @@
 .topbar {
   height: var(--topbar-h);
-  background: linear-gradient(180deg, #0a1a0f 0%, #071510 100%);
-  border-bottom: 1px solid var(--border-mid);
+  background: linear-gradient(to bottom, #0a1422, #070d1a);
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -31,21 +31,21 @@
 }
 
 .logoPoker {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-family: Georgia, serif;
+  font-family: 'Cinzel', serif;
 }
 
 .logoIQ {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--gold-primary);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-family: Georgia, serif;
+  font-family: 'Cinzel', serif;
   text-shadow: 0 0 12px var(--gold-glow);
 }
 
@@ -66,10 +66,11 @@
 }
 
 .statLabel {
-  font-size: 0.62rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
 .statValue {
@@ -86,8 +87,8 @@
   opacity: 0.7;
 }
 
-.positive { color: #4caf50; }
-.negative { color: #ef5350; }
+.positive { color: #6abf6e; }
+.negative { color: var(--red-bright); }
 .neutral  { color: var(--text-secondary); }
 
 .divider {
@@ -99,12 +100,13 @@
 /* Badge */
 .badge {
   flex-shrink: 0;
-  font-size: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.15em;
   color: var(--gold-dim);
   border: 1px solid var(--gold-dim);
   padding: 3px 8px;
-  border-radius: 3px;
+  border-radius: 2px;
   text-transform: uppercase;
 }
