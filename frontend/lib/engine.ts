@@ -208,12 +208,31 @@ function isBettingClosed(state: GameState): boolean {
   const prevActions = actions.slice(0, -1);
   const otherPlayer = lastAct.player === 'human' ? 'opponent' : 'human';
 
-  // If bets are unequal, action is still open
-  if (!human.isAllIn && !opponent.isAllIn && human.betThisStreet !== opponent.betThisStreet) {
-    return false;
+  const betsEqual = human.betThisStreet === opponent.betThisStreet;
+
+  if (!betsEqual) {
+    // One or both players have unequal bets.
+    if (!human.isAllIn && !opponent.isAllIn) return false; // Neither all-in: action is open.
+
+    // One player is all-in with unequal bets.
+    const allInKey = human.isAllIn ? 'human' : 'opponent';
+    const allInBet  = human.isAllIn ? human.betThisStreet   : opponent.betThisStreet;
+    const otherBet  = human.isAllIn ? opponent.betThisStreet : human.betThisStreet;
+
+    if (allInBet < otherBet) {
+      // Short all-in: the all-in player couldn't cover. The other player
+      // has already put in more, so no further action is needed.
+      return true;
+    }
+
+    // All-in raise: the non-all-in player must still respond (call / allin / fold).
+    const responder = allInKey === 'human' ? 'opponent' : 'human';
+    return lastAct.player === responder && (lastAct.action === 'call' || lastAct.action === 'allin');
+    // fold is caught by the isFolded check at the top.
   }
 
-  // One player is all-in — other has acted (called or folded)
+  // Bets are equal from here.
+  // One player is all-in, bets match → close on the matching action.
   if (human.isAllIn || opponent.isAllIn) {
     return lastAct.action === 'call' || lastAct.action === 'check' || lastAct.action === 'allin';
   }
