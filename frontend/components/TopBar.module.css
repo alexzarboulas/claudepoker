@@ -110,3 +110,41 @@
   border-radius: 2px;
   text-transform: uppercase;
 }
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  .stats {
+    gap: 8px;
+  }
+
+  .badge {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .statLabel {
+    font-size: 0.52rem;
+  }
+
+  .statValue {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .logoPoker, .logoIQ {
+    font-size: 1rem;
+  }
+
+  .stats {
+    gap: 6px;
+  }
+}

@@ -32,6 +32,7 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
   const [sessionPnl, setSessionPnl] = useState(0);
   const [handCount, setHandCount] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Keep a ref so Pusher handlers always read the latest perspective
   const perspectiveRef = useRef<'human' | 'opponent'>('human');
@@ -171,10 +172,24 @@ export default function MultiplayerGame({ roomId, userId, username }: Props) {
               opponentName={opponentUsername}
               myName={username}
             />
+            <button
+              className={styles.sidebarToggle}
+              onClick={() => setSidebarOpen(o => !o)}
+              aria-label="Toggle sidebar"
+            >
+              {sidebarOpen ? '✕' : '☰'}
+            </button>
+            {sidebarOpen && (
+              <div
+                className={styles.sidebarBackdrop}
+                onClick={() => setSidebarOpen(false)}
+              />
+            )}
             <Sidebar
               stats={{ vpip: 0, pfr: 0, aggressionFactor: 0, foldTo3bet: 0, cbetFreq: 0, foldToRiverBet: 0, sampleSize: 0 }}
               tips={[]}
               history={[]}
+              isOpen={sidebarOpen}
             />
           </div>
           <TableChat roomId={roomId} myUsername={username} />

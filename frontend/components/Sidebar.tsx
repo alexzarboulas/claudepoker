@@ -26,6 +26,7 @@ interface SidebarProps {
   stats: PlayerStats;
   tips: Tip[];
   history: HandSummary[];
+  isOpen?: boolean;
 }
 
 const BASELINES = {
@@ -39,11 +40,11 @@ const BASELINES = {
 
 type Tab = 'tutor' | 'stats' | 'history';
 
-export default function Sidebar({ stats, tips, history }: SidebarProps) {
+export default function Sidebar({ stats, tips, history, isOpen }: SidebarProps) {
   const [activeTab, setActiveTab] = useState<Tab>('tutor');
 
   return (
-    <div className={styles.sidebar}>
+    <div className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
       {/* Tabs */}
       <div className={styles.tabBar}>
         {(['tutor', 'stats', 'history'] as Tab[]).map(tab => (

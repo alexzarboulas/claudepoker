@@ -115,6 +115,38 @@
   pointer-events: none;
 }
 
+/* ── Mobile — scale cards down to fit 5 community cards on screen ──── */
+@media (max-width: 480px) {
+  .card {
+    width: 52px;
+    height: 72px;
+    border-radius: 6px;
+  }
+
+  .cardSlot {
+    width: 52px;
+    height: 72px;
+    border-radius: 6px;
+  }
+
+  .rank {
+    font-size: 0.8rem;
+  }
+
+  .suitSmall {
+    font-size: 0.65rem;
+  }
+
+  .centerSuit {
+    font-size: 1.6rem;
+  }
+
+  .amphoraSvg {
+    width: 34px;
+    height: 44px;
+  }
+}
+
 /* Winner highlight */
 .winner {
   animation: winnerGlow 1.3s ease-in-out infinite;

@@ -189,6 +189,11 @@ h1, h2, h3 { font-family: 'Cinzel', serif; color: var(--text-gold); letter-spaci
   pointer-events: none;
 }
 
+/* ---- Touch devices ---- */
+button, [role="button"] {
+  touch-action: manipulation;
+}
+
 /* ---- Utility classes ---- */
 .gold-text    { color: var(--text-gold); }
 .muted-text   { color: var(--text-secondary); }

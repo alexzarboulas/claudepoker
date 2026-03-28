@@ -207,3 +207,41 @@
   box-shadow: 0 0 12px var(--gold-glow);
   transform: translateY(-1px);
 }
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .panel {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .sizeRow {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .quickSizes {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .quickBtn {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 0.65rem;
+  }
+
+  .sliderWrap {
+    width: 100%;
+  }
+
+  .btn {
+    min-height: 72px;
+    padding: 14px 8px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+}

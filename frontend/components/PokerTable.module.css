@@ -462,3 +462,36 @@
   border: 2px dashed rgba(212, 168, 67, 0.12);
   flex-shrink: 0;
 }
+
+/* ── Mobile ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .table {
+    padding: 12px 16px;
+  }
+
+  /* Hide decorative marble columns */
+  .leftColumn, .rightColumn {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .communitySlot {
+    width: 52px;
+    height: 72px;
+    border-radius: 6px;
+  }
+
+  .communityRow {
+    gap: 6px;
+  }
+
+  .cardRow {
+    gap: 6px;
+  }
+
+  .resultCard {
+    padding: 24px 28px;
+    min-width: 220px;
+  }
+}

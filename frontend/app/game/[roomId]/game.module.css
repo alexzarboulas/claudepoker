@@ -36,6 +36,47 @@
   animation: twinkle 4s ease-in-out infinite alternate;
 }
 
+/* Mobile sidebar toggle button */
+.sidebarToggle {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 50;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-mid);
+  color: var(--gold-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Mobile sidebar backdrop */
+.sidebarBackdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebarToggle {
+    display: flex;
+  }
+
+  .sidebarBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    top: var(--topbar-h);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 99;
+  }
+}
+
 .waitingOverlay {
   flex: 1;
   display: flex;
